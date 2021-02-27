@@ -1,0 +1,15 @@
+{
+  "api": {
+    "invokeUrl": "https://ilkitgnlx5.execute-api.us-east-1.amazonaws.com/prod/"
+  },
+  "cognito": {
+    "REGION": "us-east-1",
+    "USER_POOL_ID": "us-east-1_ErN9w8vPz",
+    "APP_CLIENT_ID": "600p2o5buou00dftnelkfi0e0v",
+    "IDENTITY_POOL_ID": "us-east-1:420f379d-6793-4b5c-9ca1-414e48405071"
+  },
+  "s3": {
+    "bucket": "devhrprojectstack-cdkreknimgagebucketabe44d40-1b4dj585e30si",
+    "thumbBucket": "devhrprojectstack-cdkreknimgagebucketresized9d46e-1iamhbox4gisa"
+  }
+}
