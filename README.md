@@ -4,4 +4,4 @@
 - cd to frontend directory and 'yar build' so that frontend/build folder has new files
 - cd to backend directory and 'cdk deploy DevhrProjectStack'
 - to open site get public bucket url from output of 'cdk deploy DevhrProjectStack' 
-e.g. http://devhrprojectstack-cdkreknpublicbucket22d34a6d-czzoedljq7re.s3-website-us-east-1.amazonaws.com/ This is important to note it.s
+e.g. http://devhrprojectstack-cdkreknpublicbucket22d34a6d-czzoedljq7re.s3-website-us-east-1.amazonaws.com/ This is important for it to work.
