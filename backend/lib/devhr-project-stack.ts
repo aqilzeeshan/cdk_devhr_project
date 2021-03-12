@@ -383,7 +383,9 @@ export class DevhrProjectStack extends cdk.Stack {
     // =====================================================================================
     rekFn.addEventSource(new event_sources.SqsEventSource(queue));
 
-    const httpApiStack = new HttpApiStack(this, 'httpApiStack');
+    
+    //HttpApi - should be moved to separate rep
+    //const httpApiStack = new HttpApiStack(this, 'httpApiStack');
     
   }
 }
