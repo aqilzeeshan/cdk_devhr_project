@@ -42,7 +42,7 @@ export class AwsdevhourBackendPipelineStack extends Stack {
       sourceAction: new codepipeline_actions.GitHubSourceAction({
         actionName: 'GitHub',
         output: sourceArtifact,
-        oauthToken: SecretValue.secretsManager('MyGitHubSecret', {jsonField: 'MyGitHubSecret'}), // this token is stored in Secret Manager
+        oauthToken: SecretValue.secretsManager('NewFullAccessToken', {jsonField: 'NewFullAccessToken'}), // this token is stored in Secret Manager
         owner: githubOwner,
         repo: githubRepo,
         branch: githubBranch
