@@ -13,10 +13,6 @@ import {HttpMethods} from '@aws-cdk/aws-s3';
 import sqs = require('@aws-cdk/aws-sqs');
 import s3n = require('@aws-cdk/aws-s3-notifications');
 
-import { HttpApiStack } from './httpapi-stack';
-
-
-
 const imageBucketName = "cdk-rekn-imgagebucket"
 const resizedBucketName = imageBucketName + "-resized"
 const websiteBucketName = "cdk-rekn-publicbucket";
@@ -55,6 +51,41 @@ export class DevhrProjectStack extends cdk.Stack {
       maxAge: 3000
     });
 
+    // =====================================================================================
+    // Construct to create our Amazon S3 Bucket to host our website
+    // =====================================================================================
+    const webBucket = new s3.Bucket(this, websiteBucketName, {
+      websiteIndexDocument: 'index.html',
+      websiteErrorDocument: 'index.html',
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      publicReadAccess: true,
+    });
+    
+    
+    //webBucket.addToResourcePolicy(new iam.PolicyStatement({
+    //  actions: ['s3:GetObject'],
+    //  resources: [webBucket.arnForObjects('*')],
+    //  principals: [new iam.AnyPrincipal()],
+    //  conditions: {
+    //    'IpAddress': {
+    //      'aws:SourceIp': [
+    //        '*.*.*.*/*' // Please change it to your IP address or from your allowed list
+    //        ]
+    //    }
+    //  }
+    //  
+    //}));
+    
+    new cdk.CfnOutput(this, 'bucketURL', { value: webBucket.bucketWebsiteDomainName });
+
+    // =====================================================================================
+    // Deploy site contents to S3 Bucket
+    // =====================================================================================
+    new s3deploy.BucketDeployment(this, 'DeployWebsite', {
+      sources: [ s3deploy.Source.asset('./public') ],
+      destinationBucket: webBucket
+    });
+    
     // =====================================================================================
     // Amazon DynamoDB table for storing image labels
     // =====================================================================================
@@ -347,8 +378,6 @@ export class DevhrProjectStack extends cdk.Stack {
     // Lambda(Rekognition) to consume messages from SQS
     // =====================================================================================
     rekFn.addEventSource(new event_sources.SqsEventSource(queue));
-
-    const httpApiStack = new HttpApiStack(this, 'httpApiStack');
     
   }
 }
