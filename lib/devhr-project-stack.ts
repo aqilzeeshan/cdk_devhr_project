@@ -86,7 +86,7 @@ export class DevhrProjectStack extends cdk.Stack {
     // Deploy site contents to S3 Bucket
     // =====================================================================================
     new s3deploy.BucketDeployment(this, 'DeployWebsite', {
-      sources: [ s3deploy.Source.asset('../frontend/build') ],
+      sources: [ s3deploy.Source.asset('./frontend/build') ],
       destinationBucket: webBucket
     });
     
