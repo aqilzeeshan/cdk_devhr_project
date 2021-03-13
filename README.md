@@ -1,6 +1,6 @@
 # To build this project
-- cd to backend directory and `cdk deploy AwsdevhourBackendPipelineStack` to deploy CodePipeline. Backend stack `DevhrProjectStack` will be created by CodePipeline when any commits are pushed to this github repo.
-- once backend stack `DevhrProjectStack` is deployed get all the info and fill-in `src/config.json` in `devhr_frontend_project` repo.
+- CD to backend directory and `cdk deploy AwsdevhourBackendPipelineStack` to deploy CodePipeline. Backend stack `DevhrProjectStack` will be created by CodePipeline when any commits are pushed to this github repo.
+- Once backend stack `DevhrProjectStack` is deployed get all the info and fill-in `src/config.json` in `devhr_frontend_project` repo.
 - In `devhr_frontend_project` repo do `yarn build` so that `build` folder has newly built files
 - In `cdk_devhr_project` do `git add --all`, `git commit -am 'changes'` and `git push` so that `DevhrProjectStack` gets updated and public S3 bucket gets new files. 
 - To open site get public bucket url from output of `DevhrProjectStack` in CloudFormation
