@@ -56,41 +56,6 @@ export class DevhrProjectStack extends cdk.Stack {
     });
 
     // =====================================================================================
-    // Construct to create our Amazon S3 Bucket to host our website
-    // =====================================================================================
-    const webBucket = new s3.Bucket(this, websiteBucketName, {
-      websiteIndexDocument: 'index.html',
-      websiteErrorDocument: 'index.html',
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-      publicReadAccess: true,
-    });
-    
-    
-    //webBucket.addToResourcePolicy(new iam.PolicyStatement({
-    //  actions: ['s3:GetObject'],
-    //  resources: [webBucket.arnForObjects('*')],
-    //  principals: [new iam.AnyPrincipal()],
-    //  conditions: {
-    //    'IpAddress': {
-    //      'aws:SourceIp': [
-    //        '*.*.*.*/*' // Please change it to your IP address or from your allowed list
-    //        ]
-    //    }
-    //  }
-    //  
-    //}));
-    
-    new cdk.CfnOutput(this, 'bucketURL', { value: webBucket.bucketWebsiteDomainName });
-
-    // =====================================================================================
-    // Deploy site contents to S3 Bucket
-    // =====================================================================================
-    new s3deploy.BucketDeployment(this, 'DeployWebsite', {
-      sources: [ s3deploy.Source.asset('./frontend/build') ],
-      destinationBucket: webBucket
-    });
-    
-    // =====================================================================================
     // Amazon DynamoDB table for storing image labels
     // =====================================================================================
     const table = new dynamodb.Table(this, 'ImageLabels', {
